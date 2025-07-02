@@ -8,4 +8,5 @@ import lombok.Setter;
 @Setter
 @Entity
 public abstract class SeatType extends BaseModel {
+    private String type;
 }
