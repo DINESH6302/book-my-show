@@ -9,6 +9,8 @@ import lombok.Getter;
 import lombok.Setter;
 import org.lld.bookmyshow.models.enums.SeatStatus;
 
+import java.util.Date;
+
 @Getter
 @Setter
 @Entity
@@ -21,5 +23,7 @@ public class ShowSeatStatus extends BaseModel {
     private Seat seat;
 
     @Enumerated(EnumType.ORDINAL)
-    private SeatStatus seatStatus;
+    private SeatStatus status;
+
+    private Date lockedAt;
 }
