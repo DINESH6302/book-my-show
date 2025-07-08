@@ -1,8 +1,13 @@
-package org.lld.bookmyshow.services;
+package org.lld.bookmyshow.repositories;
 
 import org.lld.bookmyshow.models.Show;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-public interface ShowRepository implement JpaRepository<Show, Long> {
-    // Additional query methods can be defined here if needed
+import java.util.Optional;
+
+@Repository
+public interface ShowRepository extends JpaRepository<Show, Long> {
+    @Override
+    Optional<Show> findById(Long showId);
 }
