@@ -30,18 +30,21 @@ public class TicketServiceImpl implements TicketService {
     private final ShowRepository showRepository;
     private final TicketRepository ticketRepository;
     private final ShowSeatRepository showSeatRepository;
+    private final PriceCalculatorServiceImpl priceCalculatorServiceImpl;
 
     @Autowired
     TicketServiceImpl(ShowRepository showRepository,
                       TicketRepository ticketRepository,
                       ShowSeatRepository showSeatRepository,
                       ShowSeatTypeRepository showSeatTypeRepository,
-                      UserRepository userRepository) {
+                      UserRepository userRepository,
+                      PriceCalculatorServiceImpl priceCalculatorServiceImpl) {
         this.showSeatTypeRepository = showSeatTypeRepository;
         this.showRepository = showRepository;
         this.ticketRepository = ticketRepository;
         this.showSeatRepository = showSeatRepository;
         this.userRepository = userRepository;
+        this.priceCalculatorServiceImpl = priceCalculatorServiceImpl;
     }
 
     @Override
@@ -70,10 +73,11 @@ public class TicketServiceImpl implements TicketService {
         ticket.setBookedSeats(availableShowSeats);
         ticket.setBookedBy(user);
         ticket.setBookedAt(new Date());
+        ticket.setPrice(priceCalculatorServiceImpl.calculatePrice(show, availableShowSeats));
         ticket.setTicketStatus(TicketStatus.PENDING);
         ticket.setPayments(new ArrayList<>());
 
-        return ticket;
+        return ticketRepository.save(ticket);
     }
 
     @Transactional(isolation = Isolation.SERIALIZABLE, timeout = 2)

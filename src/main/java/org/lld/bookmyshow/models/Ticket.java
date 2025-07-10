@@ -12,6 +12,7 @@ import lombok.Setter;
 import org.lld.bookmyshow.models.enums.TicketStatus;
 
 import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 
 @Getter
@@ -19,7 +20,7 @@ import java.util.List;
 @Entity
 public class Ticket extends BaseModel {
     private double price;
-    private LocalDateTime bookedAt;
+    private Date bookedAt;
 
     @ManyToOne
     private Show show;
@@ -29,7 +30,7 @@ public class Ticket extends BaseModel {
 
     // one ticket can have multiple seats and one seat can be booked in multiple tickets(booked, canceled)
     @ManyToMany
-    private List<Seat> bookedSeats;
+    private List<ShowSeat> bookedSeats;
 
     @OneToMany
     private List<Payment> payments;

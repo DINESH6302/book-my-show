@@ -1,4 +1,13 @@
 package org.lld.bookmyshow.dto;
 
-public class TicketResponceDto {
+import lombok.Data;
+
+import java.util.List;
+
+@Data
+public class TicketResponseDto {
+    private Long ticketId;
+    private double amount;
+    private ResponseStatus status;
+    private String failureMessage;
 }

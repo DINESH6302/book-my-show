@@ -1,6 +1,5 @@
 package org.lld.bookmyshow.models;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -14,7 +13,7 @@ import java.util.Date;
 @Getter
 @Setter
 @Entity
-public class ShowSeatStatus extends BaseModel {
+public class ShowSeat extends BaseModel {
 
     @ManyToOne
     private Show show;
